@@ -5,8 +5,9 @@ const JournalContainer = styled.div`
   background: #ffffff;
   border-radius: 10px;
   padding: 20px;
+  width: 80%;
   max-width: 600px;
-  width: 100%;
+  margin: 20px 0;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 `;
 
@@ -16,8 +17,8 @@ const TextArea = styled.textarea`
   border: 1px solid #e0e0e0;
   border-radius: 8px;
   padding: 10px;
-  resize: none;
   font-size: 16px;
+  resize: none;
   outline: none;
   transition: border-color 0.3s;
   &:focus {
@@ -25,30 +26,22 @@ const TextArea = styled.textarea`
   }
 `;
 
-const MoodPrompt = styled.p`
-  font-size: 18px;
-  color: #4a5568;
-  margin-bottom: 10px;
-`;
-
 const JournalEntry = ({ onMoodChange }) => {
   const [entry, setEntry] = useState("");
-  const [prompt, setPrompt] = useState("What’s on your mind?");
 
   const handleEntryChange = (e) => {
     const newEntry = e.target.value;
     setEntry(newEntry);
 
-    // Simple mood analysis: detect keywords
-    if (newEntry.includes("happy")) onMoodChange("#D4EDDA");
-    else if (newEntry.includes("sad")) onMoodChange("#E2E2F0");
-    else if (newEntry.includes("anxious")) onMoodChange("#FFF3CD");
-    else onMoodChange("#f0f4f8"); // default color
+    // Basic mood detection based on keywords
+    if (newEntry.includes("happy")) onMoodChange("#d4f7da");
+    else if (newEntry.includes("sad")) onMoodChange("#e8d7f7");
+    else onMoodChange("#f0f4f8"); // Default color
   };
 
   return (
     <JournalContainer>
-      <MoodPrompt>{prompt}</MoodPrompt>
+      <h2>How are you feeling today?</h2>
       <TextArea
         placeholder="Write your thoughts here..."
         value={entry}
